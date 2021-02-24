@@ -1,11 +1,16 @@
 package com.educandoweb.course.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.educandoweb.course.entities.Category;
 
 public class CategoryDTO {
 
 	private Long id;
 	private String name;
+	
+	private Set<ProductDTO> products = new HashSet<>();
 
 	public CategoryDTO() {
 	}
@@ -35,6 +40,10 @@ public class CategoryDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Set<ProductDTO> getProducts() {
+		return products;
+	}
 
 	@Override
 	public int hashCode() {
@@ -60,5 +69,7 @@ public class CategoryDTO {
 			return false;
 		return true;
 	}
+
+	
 
 }
