@@ -1,5 +1,6 @@
 package com.educandoweb.course.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 import javax.persistence.Entity;
@@ -16,8 +17,10 @@ import com.educandoweb.course.util.Convertible;
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements Convertible<OrderDTO> {
+public class Order implements Convertible<OrderDTO>, Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
