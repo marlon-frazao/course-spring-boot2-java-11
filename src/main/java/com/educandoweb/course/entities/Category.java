@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.educandoweb.course.dto.CategoryDTO;
 import com.educandoweb.course.util.Convertible;
@@ -25,7 +25,7 @@ public class Category implements Convertible<CategoryDTO>, Serializable {
 	private Long id;
 	private String name;
 
-	@Transient
+	@ManyToMany(mappedBy = "categories")
 	private Set<Product> products = new HashSet<>();
 	public Category() {
 	}

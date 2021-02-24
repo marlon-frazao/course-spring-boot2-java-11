@@ -2,6 +2,7 @@ package com.educandoweb.course.dto;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.educandoweb.course.entities.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,7 +15,6 @@ public class ProductDTO {
 	private Double price;
 	private String imgUrl;
 	
-	@JsonIgnore
 	private Set<CategoryDTO> categories = new HashSet<>();
 	
 	public ProductDTO() {}
@@ -33,6 +33,7 @@ public class ProductDTO {
 		this.description = entity.getDescription();
 		this.price = entity.getPrice();
 		this.imgUrl = entity.getImgUrl();
+		this.categories = entity.getCategories().stream().map(x -> x.convert()).collect(Collectors.toSet());
 	}
 
 	public Long getId() {

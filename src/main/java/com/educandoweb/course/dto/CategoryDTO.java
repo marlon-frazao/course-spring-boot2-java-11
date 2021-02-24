@@ -4,12 +4,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.educandoweb.course.entities.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CategoryDTO {
 
 	private Long id;
 	private String name;
 	
+	@JsonIgnore
 	private Set<ProductDTO> products = new HashSet<>();
 
 	public CategoryDTO() {
