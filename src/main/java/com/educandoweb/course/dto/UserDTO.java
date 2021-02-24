@@ -1,5 +1,9 @@
 package com.educandoweb.course.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.educandoweb.course.entities.User;
 
 public class UserDTO {
@@ -8,6 +12,8 @@ public class UserDTO {
 	private String email;
 	private String phone;
 	private String password;
+	
+	private List<OrderDTO> orders = new ArrayList<>();
 	
 	public UserDTO() {}
 
@@ -25,6 +31,7 @@ public class UserDTO {
 		this.email = entity.getEmail();
 		this.phone = entity.getPhone();
 		this.password = entity.getPassword();
+		this.orders = entity.getOrders().stream().map(x -> x.convert()).collect(Collectors.toList());
 	}
 
 	public Long getId() {
@@ -65,6 +72,10 @@ public class UserDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<OrderDTO> getOrders() {
+		return orders;
 	}
 
 	@Override
