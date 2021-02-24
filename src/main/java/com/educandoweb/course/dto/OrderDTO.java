@@ -3,26 +3,30 @@ package com.educandoweb.course.dto;
 import java.time.Instant;
 
 import com.educandoweb.course.entities.Order;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class OrderDTO {
 
 	private Long id;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
-	
+
 	private UserDTO client;
-	
-	public OrderDTO() {}
+
+	public OrderDTO() {
+	}
 
 	public OrderDTO(Long id, Instant moment, UserDTO client) {
 		this.id = id;
 		this.moment = moment;
 		this.client = client;
 	}
-	
+
 	public OrderDTO(Order entity) {
 		this.id = entity.getId();
 		this.moment = entity.getMoment();
-		this.client = entity.convert().getClient();
+		this.client = entity.getClient().convert();
 	}
 
 	public Long getId() {

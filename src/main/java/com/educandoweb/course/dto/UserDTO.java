@@ -2,9 +2,9 @@ package com.educandoweb.course.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.educandoweb.course.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDTO {
 	private Long id;
@@ -13,6 +13,7 @@ public class UserDTO {
 	private String phone;
 	private String password;
 	
+	@JsonIgnore
 	private List<OrderDTO> orders = new ArrayList<>();
 	
 	public UserDTO() {}
@@ -31,7 +32,7 @@ public class UserDTO {
 		this.email = entity.getEmail();
 		this.phone = entity.getPhone();
 		this.password = entity.getPassword();
-		this.orders = entity.getOrders().stream().map(x -> x.convert()).collect(Collectors.toList());
+		
 	}
 
 	public Long getId() {
