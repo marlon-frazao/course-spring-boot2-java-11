@@ -1,33 +1,30 @@
-package com.educandoweb.course.entities;
+package com.educandoweb.course.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.educandoweb.course.entities.User;
 
-import com.educandoweb.course.dto.UserDTO;
-import com.educandoweb.course.util.Convertible;
-
-@Entity
-public class User implements Convertible<UserDTO> {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDTO {
 	private Long id;
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
+	
+	public UserDTO() {}
 
-	public User() {
-	}
-
-	public User(Long id, String name, String email, String phone, String password) {
+	public UserDTO(Long id, String name, String email, String phone, String password) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
+	}
+	
+	public UserDTO(User entity) {
+		this.id = entity.getId();
+		this.name = entity.getName();
+		this.email = entity.getEmail();
+		this.phone = entity.getPhone();
+		this.password = entity.getPassword();
 	}
 
 	public Long getId() {
@@ -86,17 +83,12 @@ public class User implements Convertible<UserDTO> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserDTO other = (UserDTO) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	@Override
-	public UserDTO convert() {
-		return new UserDTO(this);
 	}
 }
