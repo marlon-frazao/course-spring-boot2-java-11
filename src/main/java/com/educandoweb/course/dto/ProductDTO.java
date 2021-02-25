@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.educandoweb.course.entities.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ProductDTO {
 	
@@ -15,6 +16,8 @@ public class ProductDTO {
 	private String imgUrl;
 	
 	private Set<CategoryDTO> categories = new HashSet<>();
+	
+	private Set<OrderDTO> items = new HashSet<>();
 	
 	public ProductDTO() {}
 
@@ -33,6 +36,7 @@ public class ProductDTO {
 		this.price = entity.getPrice();
 		this.imgUrl = entity.getImgUrl();
 		this.categories = entity.getCategories().stream().map(x -> x.convert()).collect(Collectors.toSet());
+		this.items = entity.getOrders().stream().map(x -> x.convert()).collect(Collectors.toSet());
 	}
 
 	public Long getId() {
@@ -77,6 +81,11 @@ public class ProductDTO {
 
 	public Set<CategoryDTO> getCategories() {
 		return categories;
+	}
+	
+	@JsonIgnore
+	public Set<OrderDTO> getOrders() {
+		return items;
 	}
 
 	@Override
