@@ -5,7 +5,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.educandoweb.course.entities.Product;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ProductDTO {
 	

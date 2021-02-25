@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import com.educandoweb.course.dto.CategoryDTO;
 import com.educandoweb.course.util.Convertible;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_category")
@@ -26,6 +27,7 @@ public class Category implements Convertible<CategoryDTO>, Serializable {
 	private String name;
 
 	@ManyToMany(mappedBy = "categories")
+	@JsonIgnore
 	private Set<Product> products = new HashSet<>();
 	public Category() {
 	}

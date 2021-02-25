@@ -1,8 +1,11 @@
 package com.educandoweb.course.dto;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.educandoweb.course.entities.Order;
+import com.educandoweb.course.entities.OrderItem;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,6 +17,8 @@ public class OrderDTO {
 	private Instant moment;
 	private OrderStatus orderStatus;
 	private UserDTO client;
+	
+	private Set<OrderItem> items = new HashSet<>();
 
 	public OrderDTO() {
 	}
@@ -30,6 +35,7 @@ public class OrderDTO {
 		this.moment = entity.getMoment();
 		this.orderStatus = entity.getOrderStatus();
 		this.client = entity.getClient().convert();
+		this.items = entity.getItems();
 	}
 
 	public Long getId() {
@@ -61,6 +67,10 @@ public class OrderDTO {
 
 	public void setClient(UserDTO client) {
 		this.client = client;
+	}
+	
+	public Set<OrderItem> getItems() {
+		return items;
 	}
 
 	@Override
