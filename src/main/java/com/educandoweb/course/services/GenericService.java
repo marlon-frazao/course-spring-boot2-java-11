@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -41,9 +43,13 @@ public interface GenericService<T extends Convertible<DTO>, DTO, ID> {
 	}
 
 	default DTO update(ID id, T obj) {
-		T entity = getRepository().getOne(id);
-		updateData(entity, obj);
-		return getRepository().save(entity).convert();
+		try {
+			T entity = getRepository().getOne(id);
+			updateData(entity, obj);
+			return getRepository().save(entity).convert();
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	void updateData(T entity, T obj);
