@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.OrderItem;
+import com.educandoweb.course.entities.Payment;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,6 +20,9 @@ public class OrderDTO {
 	private UserDTO client;
 	
 	private Set<OrderItem> items = new HashSet<>();
+	
+	private Payment payment;
+	private Double total;
 
 	public OrderDTO() {
 	}
@@ -36,6 +40,8 @@ public class OrderDTO {
 		this.orderStatus = entity.getOrderStatus();
 		this.client = entity.getClient().convert();
 		this.items = entity.getItems();
+		this.total = entity.total();
+		this.payment = entity.getPayment();
 	}
 
 	public Long getId() {
@@ -72,7 +78,15 @@ public class OrderDTO {
 	public Set<OrderItem> getItems() {
 		return items;
 	}
-
+	
+	public Payment getPayment() {
+		return payment;
+	}
+	
+	public Double getTotal() {
+		return total;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
