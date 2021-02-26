@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 import com.educandoweb.course.util.Convertible;
 
 public interface GenericService<T extends Convertible<DTO>, DTO, ID> {
@@ -13,8 +14,8 @@ public interface GenericService<T extends Convertible<DTO>, DTO, ID> {
 	JpaRepository<T, ID> getRepository();
 	
 	default DTO findById(ID id) {
-		Optional<T> result = getRepository().findById(id);
-		return result.get().convert();
+		Optional<T> obj = getRepository().findById(id);
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id)).convert();
 	}
 	
 	default List<DTO> findAll() {
