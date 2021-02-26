@@ -28,4 +28,6 @@ public class CategoryResource {
 	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok().body(service.findById(id));
 	}
+	
+	
 }
