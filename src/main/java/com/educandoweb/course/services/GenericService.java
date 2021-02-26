@@ -29,4 +29,12 @@ public interface GenericService<T extends Convertible<DTO>, DTO, ID> {
 	default void delete(ID id) {
 		getRepository().deleteById(id);
 	}
+	
+	default DTO update(ID id, T obj) {
+		T entity = getRepository().getOne(id);
+		updateData(entity, obj);
+		return getRepository().save(entity).convert();
+	}
+
+	void updateData(T entity, T obj);
 }

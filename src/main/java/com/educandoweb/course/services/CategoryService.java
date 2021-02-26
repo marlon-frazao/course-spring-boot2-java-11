@@ -19,4 +19,10 @@ public class CategoryService implements GenericService<Category, CategoryDTO, Lo
 		return repository;
 	}
 
+	@Override
+	public void updateData(Category entity, Category obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

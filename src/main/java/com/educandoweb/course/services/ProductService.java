@@ -19,4 +19,10 @@ public class ProductService implements GenericService<Product, ProductDTO, Long>
 		return repository;
 	}
 
+	@Override
+	public void updateData(Product entity, Product obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

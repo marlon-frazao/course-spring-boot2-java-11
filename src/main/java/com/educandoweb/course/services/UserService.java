@@ -18,4 +18,11 @@ public class UserService implements GenericService<User, UserDTO, Long>{
 	public JpaRepository<User, Long> getRepository() {
 		return repository;
 	}
+
+	@Override
+	public void updateData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+	}
 }

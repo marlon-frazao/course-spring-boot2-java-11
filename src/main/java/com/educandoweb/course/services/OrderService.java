@@ -17,4 +17,10 @@ public class OrderService implements GenericService<Order, OrderDTO, Long>{
 	public JpaRepository<Order, Long> getRepository() {
 		return repository;
 	}
+
+	@Override
+	public void updateData(Order entity, Order obj) {
+		// TODO Auto-generated method stub
+		
+	}
 }
