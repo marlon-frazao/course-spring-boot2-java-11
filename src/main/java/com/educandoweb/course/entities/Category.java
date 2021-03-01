@@ -36,6 +36,11 @@ public class Category implements Convertible<CategoryDTO>, Serializable {
 		this.id = id;
 		this.name = name;
 	}
+	
+	public Category(CategoryDTO entity) {
+		this.id = entity.getId();
+		this.name = entity.getName();
+	}
 
 	public Long getId() {
 		return id;
@@ -53,6 +58,7 @@ public class Category implements Convertible<CategoryDTO>, Serializable {
 		this.name = name;
 	}
 	
+	@JsonIgnore
 	public Set<Product> getProducts() {
 		return products;
 	}
@@ -80,6 +86,11 @@ public class Category implements Convertible<CategoryDTO>, Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + "]";
 	}
 
 	@Override

@@ -4,9 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.educandoweb.course.entities.Category;
+import com.educandoweb.course.util.Convertible;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class CategoryDTO {
+public class CategoryDTO implements Convertible<Category>{
 
 	private Long id;
 	private String name;
@@ -43,6 +44,7 @@ public class CategoryDTO {
 		this.name = name;
 	}
 	
+	@JsonIgnore
 	public Set<ProductDTO> getProducts() {
 		return products;
 	}
@@ -70,6 +72,17 @@ public class CategoryDTO {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	
+	@Override
+	public String toString() {
+		return "CategoryDTO [id=" + id + ", name=" + name + "]";
+	}
+
+	@Override
+	public Category convert() {
+		return new Category(this);
 	}
 
 	
