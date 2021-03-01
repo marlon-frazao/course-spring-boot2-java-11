@@ -29,7 +29,10 @@ public class ProductService implements GenericService<Product, ProductDTO, Long>
 
 	@Override
 	public void updateData(Product entity, Product obj) {
-
+		entity.setName(obj.getName());
+		entity.setDescription(obj.getDescription());
+		entity.setImgUrl(obj.getImgUrl());
+		entity.setPrice(obj.getPrice());
 	}
 
 	@Override
